@@ -32,11 +32,11 @@ let package = Package(
     .package(url: "https://github.com/apple/swift-collections", from: "1.0.0"),
     .package(url: "https://github.com/flote-works/GRDB.swift", branch: "flote/service-app"),
     .package(url: "https://github.com/pointfreeco/swift-concurrency-extras", from: "1.0.0"),
-    .package(url: "https://github.com/pointfreeco/swift-custom-dump", from: "1.3.3"),
+    .package(url: "https://github.com/flote-works/swift-custom-dump", from: "1.3.3"),
     .package(url: "https://github.com/flote-works/swift-dependencies", branch: "flote/service-app"),
     .package(url: "https://github.com/flote-works/swift-perception", branch: "flote/service-app"),
     .package(url: "https://github.com/flote-works/swift-sharing", branch: "flote/service-app"),
-    .package(url: "https://github.com/pointfreeco/swift-snapshot-testing", from: "1.18.4"),
+    .package(url: "https://github.com/flote-works/swift-snapshot-testing", from: "1.18.4"),
     .package(
       url: "https://github.com/flote-works/swift-structured-queries",
       branch: "flote/service-app",
