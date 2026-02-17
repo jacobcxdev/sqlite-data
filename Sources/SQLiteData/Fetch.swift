@@ -3,7 +3,7 @@ import Sharing
 #if canImport(Combine)
   import Combine
 #endif
-#if canImport(SwiftUI) && !os(Android)
+#if canImport(SwiftUI)
   import SwiftUI
 #endif
 
@@ -163,7 +163,7 @@ extension Fetch: Equatable where Value: Equatable {
   }
 }
 
-#if canImport(SwiftUI) && !os(Android)
+#if canImport(SwiftUI)
   extension Fetch: DynamicProperty {
     public func update() {
       sharedReader.update()
