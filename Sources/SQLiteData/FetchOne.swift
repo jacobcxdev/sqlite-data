@@ -900,7 +900,7 @@ extension FetchOne: Equatable where Value: Equatable {
   }
 }
 
-#if canImport(SwiftUI)
+#if canImport(SwiftUI) && !os(Android)
   extension FetchOne: DynamicProperty {
     public func update() {
       sharedReader.update()

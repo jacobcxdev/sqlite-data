@@ -397,7 +397,7 @@ extension FetchAll: Equatable where Element: Equatable {
   }
 }
 
-#if canImport(SwiftUI)
+#if canImport(SwiftUI) && !os(Android)
   extension FetchAll: DynamicProperty {
     public func update() {
       sharedReader.update()
