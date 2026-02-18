@@ -900,8 +900,9 @@ extension FetchOne: Equatable where Value: Equatable {
   }
 }
 
-#if canImport(SwiftUI) && !os(Android)
+#if canImport(SwiftUI)
   extension FetchOne: DynamicProperty {
+    #if !os(Android)
     public func update() {
       sharedReader.update()
     }
@@ -1316,6 +1317,7 @@ extension FetchOne: Equatable where Value: Equatable {
     {
       try await load(statement, database: database, scheduler: .animation(animation))
     }
+    #endif
   }
 #endif
 

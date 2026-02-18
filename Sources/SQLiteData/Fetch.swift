@@ -163,52 +163,38 @@ extension Fetch: Equatable where Value: Equatable {
   }
 }
 
-#if canImport(SwiftUI) && !os(Android)
+#if canImport(SwiftUI)
   extension Fetch: DynamicProperty {
-    public func update() {
-      sharedReader.update()
-    }
+    #if !os(Android)
+      public func update() {
+        sharedReader.update()
+      }
 
-    /// Initializes this property with a request associated with the wrapped value.
-    ///
-    /// - Parameters:
-    ///   - wrappedValue: A default value to associate with this property.
-    ///   - request: A request describing the data to fetch.
-    ///   - database: The database to read from. A value of `nil` will use the default database
-    ///     (`@Dependency(\.defaultDatabase)`).
-    ///   - animation: The animation to use for user interface changes that result from changes to
-    ///     the fetched results.
-    @available(iOS 17, macOS 14, tvOS 17, watchOS 10, *)
-    public init(
-      wrappedValue: Value,
-      _ request: some FetchKeyRequest<Value>,
-      database: (any DatabaseReader)? = nil,
-      animation: Animation
-    ) {
-      sharedReader = SharedReader(
-        wrappedValue: wrappedValue,
-        .fetch(request, database: database, animation: animation)
-      )
-    }
+      /// Initializes this property with a request associated with the wrapped value.
+      @available(iOS 17, macOS 14, tvOS 17, watchOS 10, *)
+      public init(
+        wrappedValue: Value,
+        _ request: some FetchKeyRequest<Value>,
+        database: (any DatabaseReader)? = nil,
+        animation: Animation
+      ) {
+        sharedReader = SharedReader(
+          wrappedValue: wrappedValue,
+          .fetch(request, database: database, animation: animation)
+        )
+      }
 
-    /// Replaces the wrapped value with data from the given request.
-    ///
-    /// - Parameters:
-    ///   - request: A request describing the data to fetch.
-    ///   - database: The database to read from. A value of `nil` will use the default database
-    ///     (`@Dependency(\.defaultDatabase)`).
-    ///   - animation: The animation to use for user interface changes that result from changes to
-    ///     the fetched results.
-    /// - Returns: A subscription associated with the observation.
-    @available(iOS 17, macOS 14, tvOS 17, watchOS 10, *)
-    @discardableResult
-    public func load(
-      _ request: some FetchKeyRequest<Value>,
-      database: (any DatabaseReader)? = nil,
-      animation: Animation
-    ) async throws -> FetchSubscription {
-      try await sharedReader.load(.fetch(request, database: database, animation: animation))
-      return FetchSubscription(sharedReader: sharedReader)
-    }
+      /// Replaces the wrapped value with data from the given request.
+      @available(iOS 17, macOS 14, tvOS 17, watchOS 10, *)
+      @discardableResult
+      public func load(
+        _ request: some FetchKeyRequest<Value>,
+        database: (any DatabaseReader)? = nil,
+        animation: Animation
+      ) async throws -> FetchSubscription {
+        try await sharedReader.load(.fetch(request, database: database, animation: animation))
+        return FetchSubscription(sharedReader: sharedReader)
+      }
+    #endif
   }
 #endif
