@@ -1,5 +1,5 @@
 {
-  "originHash" : "747afd09cb0e7fc9f0ad4471a57b1d7f7141cdb2f53433cd41d557845bbf2250",
+  "originHash" : "0dd52fe3ad03c2a4759682190467b2e86ec2d3bc64f1dcd28a12a20a3e529091",
   "pins" : [
     {
       "identity" : "combine-schedulers",
@@ -58,7 +58,7 @@
     {
       "identity" : "swift-custom-dump",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/flote-works/swift-custom-dump",
+      "location" : "https://github.com/pointfreeco/swift-custom-dump",
       "state" : {
         "revision" : "2a2a938798236b8fa0bc57c453ee9de9f9ec3ab0",
         "version" : "1.4.1"
@@ -103,10 +103,10 @@
     {
       "identity" : "swift-perception",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/flote-works/swift-perception",
+      "location" : "https://github.com/pointfreeco/swift-perception",
       "state" : {
-        "branch" : "flote/service-app",
-        "revision" : "9d6298525bec6dbce4ae44e6e26b842a819932c9"
+        "revision" : "4f47ebafed5f0b0172cf5c661454fa8e28fb2ac4",
+        "version" : "2.0.9"
       }
     },
     {
@@ -121,7 +121,7 @@
     {
       "identity" : "swift-snapshot-testing",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/flote-works/swift-snapshot-testing",
+      "location" : "https://github.com/pointfreeco/swift-snapshot-testing",
       "state" : {
         "revision" : "bf8d8c27f0f0c6d5e77bff0db76ab68f2050d15d",
         "version" : "1.18.9"
