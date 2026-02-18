@@ -209,3 +209,56 @@ final class SQLiteDataAndroidParityTests: XCTestCase {
     XCTAssertEqual(restored!.timeIntervalSince1970, now.timeIntervalSince1970, accuracy: 0.001)
   }
 }
+
+// MARK: - Category B: DynamicProperty conformances (un-guarded code)
+
+#if canImport(SwiftUI)
+  import SwiftUI
+  import Sharing
+
+  /// Tests verifying that @Fetch, @FetchAll, @FetchOne have DynamicProperty conformance.
+  /// These conformances were un-guarded to work on Android via SkipSwiftUI.
+  final class FetchDynamicPropertyParityTests: XCTestCase {
+    func testFetchConformsToDynamicProperty() {
+      // Verify @Fetch has DynamicProperty conformance (un-guarded in Fetch.swift).
+      // This would fail to compile if DynamicProperty conformance were guarded.
+      let fetch = Fetch<[String]>(wrappedValue: [])
+      XCTAssertTrue(fetch is any DynamicProperty)
+      XCTAssertEqual(fetch.wrappedValue, [])
+    }
+
+    func testFetchAllConformsToDynamicProperty() {
+      // Verify @FetchAll has DynamicProperty conformance (un-guarded in FetchAll.swift).
+      let fetchAll = FetchAll<String>()
+      XCTAssertTrue(fetchAll is any DynamicProperty)
+      XCTAssertEqual(fetchAll.wrappedValue, [])
+    }
+
+    func testFetchOneConformsToDynamicProperty() {
+      // Verify @FetchOne has DynamicProperty conformance (un-guarded in FetchOne.swift).
+      let fetchOne = FetchOne<Int>(wrappedValue: 0)
+      XCTAssertTrue(fetchOne is any DynamicProperty)
+      XCTAssertEqual(fetchOne.wrappedValue, 0)
+    }
+
+    func testFetchSharedReaderAccess() {
+      // Verify the underlying sharedReader is accessible — confirms the full
+      // Fetch→SharedReader→DynamicProperty chain works.
+      let fetch = Fetch<[String]>(wrappedValue: ["a", "b"])
+      let reader = fetch.sharedReader
+      XCTAssertEqual(reader.wrappedValue, ["a", "b"])
+    }
+
+    func testFetchAllDefaultInit() {
+      // Verify FetchAll's default initializer produces an empty collection.
+      let fetchAll = FetchAll<Int>()
+      XCTAssertTrue(fetchAll.wrappedValue.isEmpty)
+    }
+
+    func testFetchOneDefaultWrappedValue() {
+      // Verify FetchOne preserves the default wrapped value.
+      let fetchOne = FetchOne<String>(wrappedValue: "default")
+      XCTAssertEqual(fetchOne.wrappedValue, "default")
+    }
+  }
+#endif
