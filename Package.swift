@@ -30,15 +30,15 @@ let package = Package(
   ],
   dependencies: [
     .package(url: "https://github.com/apple/swift-collections", from: "1.0.0"),
-    .package(url: "https://github.com/flote-works/GRDB.swift", branch: "flote/service-app"),
+    .package(url: "https://github.com/jacobcxdev/GRDB.swift", branch: "flote/service-app"),
     .package(url: "https://github.com/pointfreeco/swift-concurrency-extras", from: "1.0.0"),
-    .package(url: "https://github.com/flote-works/swift-custom-dump", from: "1.3.3"),
-    .package(url: "https://github.com/flote-works/swift-dependencies", branch: "flote/service-app"),
-    .package(url: "https://github.com/flote-works/swift-perception", branch: "flote/service-app"),
-    .package(url: "https://github.com/flote-works/swift-sharing", branch: "flote/service-app"),
-    .package(url: "https://github.com/flote-works/swift-snapshot-testing", from: "1.18.4"),
+    .package(url: "https://github.com/jacobcxdev/swift-custom-dump", from: "1.3.3"),
+    .package(url: "https://github.com/jacobcxdev/swift-dependencies", branch: "flote/service-app"),
+    .package(url: "https://github.com/jacobcxdev/swift-perception", branch: "flote/service-app"),
+    .package(url: "https://github.com/jacobcxdev/swift-sharing", branch: "flote/service-app"),
+    .package(url: "https://github.com/jacobcxdev/swift-snapshot-testing", from: "1.18.4"),
     .package(
-      url: "https://github.com/flote-works/swift-structured-queries",
+      url: "https://github.com/jacobcxdev/swift-structured-queries",
       branch: "flote/service-app",
       traits: [
         .trait(name: "StructuredQueriesTagged", condition: .when(traits: ["SQLiteDataTagged"]))
