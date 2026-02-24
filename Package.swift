@@ -30,26 +30,25 @@ let package = Package(
   ],
   dependencies: [
     .package(url: "https://github.com/apple/swift-collections", from: "1.0.0"),
-    .package(url: "https://github.com/jacobcxdev/GRDB.swift", branch: "flote/service-app"),
+    .package(path: "../GRDB.swift"),
     .package(url: "https://github.com/pointfreeco/swift-concurrency-extras", from: "1.0.0"),
-    .package(url: "https://github.com/jacobcxdev/swift-custom-dump", from: "1.3.3"),
-    .package(url: "https://github.com/jacobcxdev/swift-dependencies", branch: "flote/service-app"),
-    .package(url: "https://github.com/jacobcxdev/swift-perception", branch: "flote/service-app"),
-    .package(url: "https://github.com/jacobcxdev/swift-sharing", branch: "flote/service-app"),
-    .package(url: "https://github.com/jacobcxdev/swift-snapshot-testing", from: "1.18.4"),
+    .package(path: "../swift-custom-dump"),
+    .package(path: "../swift-dependencies"),
+    .package(path: "../swift-perception"),
+    .package(path: "../swift-sharing"),
+    .package(path: "../swift-snapshot-testing"),
     .package(
-      url: "https://github.com/jacobcxdev/swift-structured-queries",
-      branch: "flote/service-app",
+      path: "../swift-structured-queries",
       traits: [
         .trait(name: "StructuredQueriesTagged", condition: .when(traits: ["SQLiteDataTagged"]))
       ]
     ),
     .package(url: "https://github.com/pointfreeco/swift-tagged", from: "0.10.0"),
-    .package(url: "https://github.com/pointfreeco/xctest-dynamic-overlay", from: "1.5.0"),
+    .package(path: "../xctest-dynamic-overlay"),
   ]
     + (android ? [
       .package(url: "https://source.skip.tools/skip-bridge.git", "0.16.4"..<"2.0.0"),
-      .package(url: "https://source.skip.tools/skip-android-bridge.git", "0.6.1"..<"2.0.0"),
+      .package(path: "../skip-android-bridge"),
       .package(url: "https://source.skip.tools/swift-jni.git", "0.3.1"..<"2.0.0"),
     ] : []),
   targets: [
