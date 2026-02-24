@@ -24,14 +24,14 @@ let package = Package(
   ],
   dependencies: [
     .package(url: "https://github.com/apple/swift-collections", from: "1.0.0"),
-    .package(url: "https://github.com/groue/GRDB.swift", from: "7.6.0"),
+    .package(path: "../GRDB.swift"),
     .package(url: "https://github.com/pointfreeco/swift-concurrency-extras", from: "1.0.0"),
-    .package(url: "https://github.com/jacobcxdev/swift-custom-dump", from: "1.3.3"),
-    .package(url: "https://github.com/jacobcxdev/swift-dependencies", branch: "flote/service-app"),
-    .package(url: "https://github.com/jacobcxdev/swift-sharing", branch: "flote/service-app"),
-    .package(url: "https://github.com/pointfreeco/swift-snapshot-testing", from: "1.18.4"),
-    .package(url: "https://github.com/jacobcxdev/swift-structured-queries", branch: "flote/service-app"),
-    .package(url: "https://github.com/pointfreeco/xctest-dynamic-overlay", from: "1.5.0"),
+    .package(path: "../swift-custom-dump"),
+    .package(path: "../swift-dependencies"),
+    .package(path: "../swift-sharing"),
+    .package(path: "../swift-snapshot-testing"),
+    .package(path: "../swift-structured-queries"),
+    .package(path: "../xctest-dynamic-overlay"),
   ]
     + (android ? [
       .package(url: "https://source.skip.tools/skip-bridge.git", "0.16.4"..<"2.0.0"),
