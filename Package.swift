@@ -17,11 +17,13 @@ let package = Package(
       name: "SQLiteData",
       targets: ["SQLiteData"]
     ),
-    .library(
-      name: "SQLiteDataTestSupport",
-      targets: ["SQLiteDataTestSupport"]
-    ),
-  ],
+  ]
+    + (android ? [] : [
+      .library(
+        name: "SQLiteDataTestSupport",
+        targets: ["SQLiteDataTestSupport"]
+      ),
+    ]),
   traits: [
     .trait(
       name: "SQLiteDataTagged",
@@ -36,7 +38,6 @@ let package = Package(
     .package(path: "../swift-dependencies"),
     .package(path: "../swift-perception"),
     .package(path: "../swift-sharing"),
-    .package(path: "../swift-snapshot-testing"),
     .package(
       path: "../swift-structured-queries",
       traits: [
@@ -46,11 +47,15 @@ let package = Package(
     .package(url: "https://github.com/pointfreeco/swift-tagged", from: "0.10.0"),
     .package(path: "../xctest-dynamic-overlay"),
   ]
-    + (android ? [
-      .package(url: "https://source.skip.tools/skip-bridge.git", "0.16.4"..<"2.0.0"),
-      .package(path: "../skip-android-bridge"),
-      .package(url: "https://source.skip.tools/swift-jni.git", "0.3.1"..<"2.0.0"),
-    ] : []),
+    + (android
+      ? [
+          .package(url: "https://source.skip.tools/skip-bridge.git", "0.16.4"..<"2.0.0"),
+          .package(path: "../skip-android-bridge"),
+          .package(url: "https://source.skip.tools/swift-jni.git", "0.3.1"..<"2.0.0"),
+        ]
+      : [
+          .package(path: "../swift-snapshot-testing"),
+        ]),
   targets: [
     .target(
       name: "SQLiteData",
@@ -75,29 +80,31 @@ let package = Package(
           .product(name: "SwiftJNI", package: "swift-jni"),
         ] : [])
     ),
-    .target(
-      name: "SQLiteDataTestSupport",
-      dependencies: [
-        "SQLiteData",
-        .product(name: "ConcurrencyExtras", package: "swift-concurrency-extras"),
-        .product(name: "CustomDump", package: "swift-custom-dump"),
-        .product(name: "Dependencies", package: "swift-dependencies"),
-        .product(name: "InlineSnapshotTesting", package: "swift-snapshot-testing"),
-        .product(name: "StructuredQueriesTestSupport", package: "swift-structured-queries"),
-      ]
-    ),
-    .testTarget(
-      name: "SQLiteDataTests",
-      dependencies: [
-        "SQLiteData",
-        "SQLiteDataTestSupport",
-        .product(name: "DependenciesTestSupport", package: "swift-dependencies"),
-        .product(name: "InlineSnapshotTesting", package: "swift-snapshot-testing"),
-        .product(name: "SnapshotTestingCustomDump", package: "swift-snapshot-testing"),
-        .product(name: "StructuredQueries", package: "swift-structured-queries"),
-      ]
-    ),
-  ],
+  ]
+    + (android ? [] : [
+      .target(
+        name: "SQLiteDataTestSupport",
+        dependencies: [
+          "SQLiteData",
+          .product(name: "ConcurrencyExtras", package: "swift-concurrency-extras"),
+          .product(name: "CustomDump", package: "swift-custom-dump"),
+          .product(name: "Dependencies", package: "swift-dependencies"),
+          .product(name: "InlineSnapshotTesting", package: "swift-snapshot-testing"),
+          .product(name: "StructuredQueriesTestSupport", package: "swift-structured-queries"),
+        ]
+      ),
+      .testTarget(
+        name: "SQLiteDataTests",
+        dependencies: [
+          "SQLiteData",
+          "SQLiteDataTestSupport",
+          .product(name: "DependenciesTestSupport", package: "swift-dependencies"),
+          .product(name: "InlineSnapshotTesting", package: "swift-snapshot-testing"),
+          .product(name: "SnapshotTestingCustomDump", package: "swift-snapshot-testing"),
+          .product(name: "StructuredQueries", package: "swift-structured-queries"),
+        ]
+      ),
+    ]),
   swiftLanguageModes: [.v6]
 )
 

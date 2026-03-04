@@ -25,7 +25,7 @@ let package = Package(
   dependencies: [
     .package(url: "https://github.com/apple/swift-collections", from: "1.0.0"),
     .package(path: "../GRDB.swift"),
-    .package(url: "https://github.com/pointfreeco/swift-concurrency-extras", from: "1.0.0"),
+    .package(path: "../swift-concurrency-extras"),
     .package(path: "../swift-custom-dump"),
     .package(path: "../swift-dependencies"),
     .package(path: "../swift-sharing"),
