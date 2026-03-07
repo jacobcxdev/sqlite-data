@@ -29,7 +29,7 @@ public func defaultDatabase(
           appropriateFor: nil,
           create: true
         )
-        return applicationSupportDirectory.appendingPathComponent("SQLiteData.db").absoluteString
+        return applicationSupportDirectory.appendingPathComponent("SQLiteData.db").path
       }
     }
     database = try DatabasePool(path: path ?? defaultPath, configuration: configuration)
