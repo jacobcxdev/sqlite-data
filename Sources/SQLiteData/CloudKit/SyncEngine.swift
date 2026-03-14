@@ -106,7 +106,7 @@
       let containerIdentifier =
         containerIdentifier
         ?? ModelConfiguration(groupContainer: .automatic).cloudKitContainerIdentifier
-        ?? (context == .preview ? "preview" : nil)
+        ?? (context != .live ? "container" : nil)
       var allTables: [any SynchronizableTable] = []
       var allPrivateTables: [any SynchronizableTable] = []
       for table in repeat each tables {
@@ -509,7 +509,7 @@
         if context == .preview {
           previewTimerTask.withValue {
             $0?.cancel()
-            $0 = Task { [weak self] in
+            $0 = Task { @Sendable [weak self] in
               await withErrorReporting {
                 while true {
                   guard let self else { break }
@@ -1179,7 +1179,8 @@
               // NB: Fake 'sending' result.
               nonisolated(unsafe) var result: T.QueryOutput?
               try await userDatabase.read { db in
-                result = try T
+                result =
+                  try T
                   .where {
                     #sql("\($0.primaryKey) = \(bind: metadata.recordPrimaryKey)")
                   }
@@ -1850,7 +1851,7 @@
       try await userDatabase.write { db in
         try SyncMetadata
           .find(rootRecordID)
-          .update { $0.share = share }
+          .update { $0.share = #bind(share) }
           .execute(db)
       }
     }
@@ -1880,7 +1881,7 @@
           )
           .update {
             $0.setLastKnownServerRecord(rootRecord)
-            $0.share = nil
+            $0.share = #bind(nil)
           }
           .execute(db)
       }
@@ -2062,7 +2063,8 @@
               if data == nil {
                 reportIssue("Asset data not found on disk")
               }
-              return "\(quote: columnName) = \(data?.queryFragment ?? #""excluded".\#(quote: columnName)"#)"
+              return
+                "\(quote: columnName) = \(data?.queryFragment ?? #""excluded".\#(quote: columnName)"#)"
             } else {
               return """
                 \(quote: columnName) = \
@@ -2167,7 +2169,9 @@
     package var `private`: (any SyncEngineProtocol)? {
       guard let `private` = rawValue?.private
       else {
-        reportIssue("Private sync engine has not been set.")
+        if isRunning {
+          reportIssue("Private sync engine has not been set.")
+        }
         return nil
       }
       return `private`
@@ -2175,7 +2179,9 @@
     package var `shared`: (any SyncEngineProtocol)? {
       guard let `shared` = rawValue?.shared
       else {
-        reportIssue("Shared sync engine has not been set.")
+        if isRunning {
+          reportIssue("Shared sync engine has not been set.")
+        }
         return nil
       }
       return `shared`
@@ -2212,7 +2218,7 @@
       let containerIdentifier =
         containerIdentifier
         ?? ModelConfiguration(groupContainer: .automatic).cloudKitContainerIdentifier
-        ?? (context == .preview ? "preview" : nil)
+        ?? (context != .live ? "container" : nil)
 
       guard let containerIdentifier else {
         throw SyncEngine.SchemaError.noCloudKitContainer
@@ -2241,7 +2247,7 @@
         url.isInMemory
         ? try DatabaseQueue(path: path)
         : try DatabasePool(path: path)
-      _ = try database.write { db in
+      _ = try database.read { db in
         try #sql("SELECT 1").execute(db)
       }
       try #sql(
@@ -2326,7 +2332,7 @@
         for table in tables {
           func open<T>(_: some SynchronizableTable<T>) throws {
             let columnsWithUniqueConstraints = try PragmaIndexList<T>
-              .where { $0.isUnique && $0.origin != "pk" }
+              .where { $0.isUnique && $0.origin.neq("pk") }
               .select(\.name)
               .fetchAll(db)
             if !columnsWithUniqueConstraints.isEmpty {
@@ -2438,12 +2444,14 @@
     mutating func setLastKnownServerRecord(_ lastKnownServerRecord: CKRecord?) {
       self.zoneName = lastKnownServerRecord?.recordID.zoneID.zoneName ?? self.zoneName
       self.ownerName = lastKnownServerRecord?.recordID.zoneID.ownerName ?? self.ownerName
-      self.lastKnownServerRecord = lastKnownServerRecord
-      self._lastKnownServerRecordAllFields = lastKnownServerRecord
+      self.lastKnownServerRecord = #bind(lastKnownServerRecord)
+      self._lastKnownServerRecordAllFields = #bind(lastKnownServerRecord)
       if let lastKnownServerRecord {
-        self.userModificationTime = #sql("""
+        self.userModificationTime = #sql(
+          """
           max(\(self.userModificationTime), \(lastKnownServerRecord.userModificationTime))
-          """)
+          """
+        )
       }
     }
   }

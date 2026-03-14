@@ -1,31 +1,22 @@
 {
-  "originHash" : "747afd09cb0e7fc9f0ad4471a57b1d7f7141cdb2f53433cd41d557845bbf2250",
+  "originHash" : "2b95f254bb904411c5a0aba0e0402c157014542e9bd40eb5848c42c8598b80a9",
   "pins" : [
     {
       "identity" : "combine-schedulers",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/flote-works/combine-schedulers",
+      "location" : "https://github.com/pointfreeco/combine-schedulers",
       "state" : {
-        "branch" : "flote/service-app",
-        "revision" : "9e5d118af1f518f8a6ce832047765cec622729c6"
+        "revision" : "fd16d76fd8b9a976d88bfb6cacc05ca8d19c91b6",
+        "version" : "1.1.0"
       }
     },
     {
       "identity" : "grdb.swift",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/flote-works/GRDB.swift",
+      "location" : "https://github.com/groue/GRDB.swift",
       "state" : {
-        "branch" : "flote/service-app",
-        "revision" : "36dba72a8562d9b7aec10a95021836060831c9a5"
-      }
-    },
-    {
-      "identity" : "opencombine",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/OpenCombine/OpenCombine.git",
-      "state" : {
-        "revision" : "8576f0d579b27020beccbccc3ea6844f3ddfc2c2",
-        "version" : "0.14.0"
+        "revision" : "36e30a6f1ef10e4194f6af0cff90888526f0c115",
+        "version" : "7.10.0"
       }
     },
     {
@@ -58,7 +49,7 @@
     {
       "identity" : "swift-custom-dump",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/flote-works/swift-custom-dump",
+      "location" : "https://github.com/pointfreeco/swift-custom-dump",
       "state" : {
         "revision" : "2a2a938798236b8fa0bc57c453ee9de9f9ec3ab0",
         "version" : "1.4.1"
@@ -67,10 +58,10 @@
     {
       "identity" : "swift-dependencies",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/flote-works/swift-dependencies",
+      "location" : "https://github.com/pointfreeco/swift-dependencies",
       "state" : {
-        "branch" : "flote/service-app",
-        "revision" : "45992be553ea7bae99670939b54fd23c7f657ae0"
+        "revision" : "c79f72b3e67a1eb64f66f76704c22ed6a5c1ed84",
+        "version" : "1.11.0"
       }
     },
     {
@@ -103,25 +94,25 @@
     {
       "identity" : "swift-perception",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/flote-works/swift-perception",
+      "location" : "https://github.com/pointfreeco/swift-perception",
       "state" : {
-        "branch" : "flote/service-app",
-        "revision" : "9d6298525bec6dbce4ae44e6e26b842a819932c9"
+        "revision" : "4f47ebafed5f0b0172cf5c661454fa8e28fb2ac4",
+        "version" : "2.0.9"
       }
     },
     {
       "identity" : "swift-sharing",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/flote-works/swift-sharing",
+      "location" : "https://github.com/pointfreeco/swift-sharing",
       "state" : {
-        "branch" : "flote/service-app",
-        "revision" : "7a31a71be81f618c45b8f5f35d1446d02bbda877"
+        "revision" : "3bfc408cc2d0bee2287c174da6b1c76768377818",
+        "version" : "2.7.4"
       }
     },
     {
       "identity" : "swift-snapshot-testing",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/flote-works/swift-snapshot-testing",
+      "location" : "https://github.com/pointfreeco/swift-snapshot-testing",
       "state" : {
         "revision" : "bf8d8c27f0f0c6d5e77bff0db76ab68f2050d15d",
         "version" : "1.18.9"
@@ -130,10 +121,10 @@
     {
       "identity" : "swift-structured-queries",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/flote-works/swift-structured-queries",
+      "location" : "https://github.com/pointfreeco/swift-structured-queries",
       "state" : {
-        "branch" : "flote/service-app",
-        "revision" : "fb5cc61a4e621c36ae080a94b79fa992a04028f3"
+        "revision" : "20db4a2a446f51e67e1207d54a23ad0a03471a7b",
+        "version" : "0.31.0"
       }
     },
     {
@@ -150,8 +141,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/xctest-dynamic-overlay",
       "state" : {
-        "revision" : "34e463e98ab8541c604af706c99bed7160f5ec70",
-        "version" : "1.8.1"
+        "revision" : "dfd70507def84cb5fb821278448a262c6ff2bbad",
+        "version" : "1.9.0"
       }
     }
   ],
